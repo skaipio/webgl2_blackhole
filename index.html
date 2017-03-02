@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Black hole</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
+  <script src="three.min.js" type="text/javascript"></script>
+  <script src="utils.js" type="text/javascript"></script>
+  <script src="particles.js" type="text/javascript"></script>
+  <script src="particleShader.js" type="text/javascript"></script>
+  <script src="particleEmitter.js" type="text/javascript"></script>
+  <script src="index.js" type="text/javascript"></script>
+</head>
+
+<style>
+  html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+  }
+  body {
+    background-color: #141225;
+    color: white;
+    display: flex;
+  }
+
+  #stage {
+    width: 80%;
+    height: 100%;
+  }
+
+  .stage {
+    flex-grow: 1;
+  }
+
+  .flex-container {
+    align-items: stretch;
+    display: flex;
+  }
+
+  input {
+    margin-bottom: 5px;
+  }
+
+  .centered {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .flex-container.vertical {
+    flex-direction: column;
+  }
+
+  .center-container {
+    width: 640px;
+  }
+
+  .pull-left {
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  #params {
+    width: 20%;
+  }
+</style>
+
+<!-- WebGL 2 shaders -->
+<script id="vs-particles-2" type="x-shader/x-vertex">
+  uniform float pointSize;
+  varying vec3 vPosition;
+  void main() {
+    vPosition = position;
+    gl_PointSize = pointSize;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+  }
+</script>
+
+<script id="fs-particles-2" type="x-shader/x-fragment">
+  varying vec3 vPosition;
+  void main() {
+    //float depth = smoothstep( 10.24, 1.0, gl_FragCoord.z / gl_FragCoord.w );
+    //gl_FragColor = vec4( (vec3(0.0, 0.03, 0.05) + (vPosition * 0.25)), 1 );
+    gl_FragColor = vec4(1,1,1,1);
+  }
+</script>
+
+<body onload="startApp();">
+  <div id="stage"></div>
+  <div id="params" class="flex-container">
+    <form id="params-form" class="flex-container vertical">
+      <label>
+        Particle count
+        <input id="particle-count-param" type="number" value="0"/>
+      </label>
+      <label>
+        Particle size
+        <input id="particle-size-param" type="number" value="0"/>
+      </label>
+      <label>
+        Initial speed
+        <input id="particle-initial-speed-param" value="0"/>
+      </label>
+      <label>
+        Gravitational constant
+        <input id="gravitational-constant-param" value="0"/>
+      </label>
+      <button type="submit">Apply</button>
+    </form>
+  </div>
+</body>
+</html>

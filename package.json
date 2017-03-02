@@ -1,0 +1,19 @@
+{
+  "name": "webgl_blackhole",
+  "version": "1.0.0",
+  "description": "Experiment with three.js particles",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/skaipio/webl_blackhole"
+  },
+  "author": "Senni Kaipio",
+  "license": "MIT",
+  "homepage": "http://www.skaip.io/webgl/blackhole",
+  "dependencies": {
+    "three": "^0.84.0"
+  }
+}
